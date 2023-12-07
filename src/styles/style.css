@@ -1,0 +1,47 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.logo img {
+    width: 50px;
+    height: auto;
+    padding-left: 50px;
+    padding-top: 25px;
+}
+
+.user-functions {
+    margin-left: 80px;
+}
+
+.user-functions h1 {
+    margin-bottom: 40px;
+}
+
+.john-info, .sandra-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.john-info img, .sandra-info img {
+    width: 80px;
+    height: auto;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.john-info .buttons, .sandra-info .buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.john-info button, .sandra-info button {
+    background-color: black;
+    color: white;
+    margin-top: 10px;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}

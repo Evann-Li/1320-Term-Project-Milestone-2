@@ -2,8 +2,16 @@ const fs = require("fs");
 const { DEFAULT_HEADER } = require("./util/util");
 const path = require("path");
 var qs = require("querystring");
+const { createReadStream } = require("fs");
+const formidable = require('formidable');
 
 const controller = {
+    getHomePage: (request, response) => {
+        response.writeHead(200, { "Content-Type": "text/html" });
+        createReadStream(path.join(__dirname, "views", "home.html"), "utf8").pipe(
+          response
+        );
+      },
   getFormPage: (request, response) => {
     return response.end(`
     <h1>Hello world</h1> <style> h1 {color:red;}</style>
@@ -683,7 +691,38 @@ const controller = {
     response.end();
   },
 
-  uploadImages: (request, response) => {},
+  uploadImages: (request, response) => {
+    const form = new formidable.IncomingForm();
+
+    form.parse(request, (err, fields, files) => {
+      if (err) {
+        response.writeHead(500, DEFAULT_HEADER);
+        response.end(JSON.stringify({ error: "Error parsing form data" }));
+        return;
+      }
+
+      // Assuming 'fileInput' is the name attribute of your file input field
+      const uploadedFile = files.fileInput;
+
+      // Process the uploaded file as needed
+      // For example, move the file to the desired directory
+      const targetDirectory = path.join(__dirname, 'photos', 'john123');
+      const targetPath = path.join(targetDirectory, uploadedFile.name);
+
+      // Move the file to the target directory
+      fs.rename(uploadedFile.path, targetPath, (err) => {
+        if (err) {
+          response.writeHead(500, DEFAULT_HEADER);
+          response.end(JSON.stringify({ error: "Error moving the file" }));
+          return;
+        }
+
+        response.writeHead(200, DEFAULT_HEADER);
+        response.end(JSON.stringify({ success: true }));
+      });
+    });
+  },
 };
+
 
 module.exports = controller;

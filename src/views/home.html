@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../styles/style.css">
+    <title>Home</title>
+</head>
+<body>
+    <div class="logo">
+        <img src="https://cdn-icons-png.flaticon.com/512/87/87390.png">
+    </div>
+    <div class="user-functions">
+        <h1>Users</h1>
+        <div class="john-info">
+            <img src="../photos/john123/profile.jpeg">
+            <div class="buttons">
+                <form action="/images" method="post" enctype="multipart/form-data" id="johnUploadForm">
+                    <input type="file" id="johnFileInput" name="fileInput" style="display: none;">
+                    <button type="button" onclick="openFileWindow('johnFileInput')">Upload</button>
+                </form>
+                <button onclick="goToProfile('./john.html')">john123</button>
+            </div>
+        </div>
+        
+        <div class="sandra-info">
+            <img src="../photos/sandra123/profile.jpeg">
+            <div class="buttons">
+                <form action="/images" method="post" enctype="multipart/form-data" id="sandraUploadForm">
+                    <input type="file" id="sandraFileInput" name="fileInput" style="display: none;">
+                    <button type="button" onclick="openFileWindow('sandraFileInput')">Upload</button>
+                </form>
+                <button type="button" onclick="goToProfile('./sandra.html')">sandra123</button>
+            </div>
+        </div>
+    <script>
+        function openFileWindow(fileInputId) {
+            // Trigger the click event of the file input when the button is clicked
+            document.getElementById(fileInputId).click();
+        }
+
+        function goToProfile(profileUrl) {
+            // Redirect to the profile page
+            window.location.href = profileUrl;
+        }
+
+        // Add an event listener to handle file selection
+        document.getElementById('johnFileInput').addEventListener('change', handleFileUpload);
+        document.getElementById('sandraFileInput').addEventListener('change', handleFileUpload);
+
+        function handleFileUpload(event) {
+            const fileInput = event.target;
+            const file = fileInput.files[0];
+        }
+    </script>
+</body>
+</html>
